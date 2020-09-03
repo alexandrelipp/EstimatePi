@@ -1,0 +1,36 @@
+from math import*
+import random
+
+n=10000
+low=1
+up=10000
+
+
+def isprime(n):
+    if n<=2:
+        return True
+    for i in range(2,ceil(sqrt(n))+1):
+        if n%i==0:
+            return False
+    return True
+
+def factors(n):
+    factors=[n]
+    for i in range(2,n//2+1):
+        if n%i==0:
+            factors.append(i)
+    return factors
+
+def isCoprime(m,n):
+    return not any(i in factors(n)for i in factors(m))
+
+nCoprimes=0
+
+for i in range(n):
+    n1=random.randint(low,up)
+    n2=random.randint(low,up)
+    nCoprimes=nCoprimes+1 if isCoprime(n1,n2) else nCoprimes
+
+estimatePi=sqrt(6/(nCoprimes/n))
+
+print("estimate of pi :", estimatePi)
